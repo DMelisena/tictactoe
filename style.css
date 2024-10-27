@@ -1,0 +1,89 @@
+/*basicreset{{{*/
+:root {
+  --color1: rgb(2, 21, 38);
+  --color2: rgb(3, 52, 110);
+  --color2v: rgb(0, 48, 104);
+  --color3: rgb(110, 172, 218);
+  --color4: rgb(226, 226, 182);
+  --color5: rgb(0, 128, 128);
+  --color6: rgb(64, 224, 208);
+  /* font-family: Helvetica; */
+  font-family: Inter, sans-serif;
+  color:grey;
+}
+
+body {
+  background-color: var(--color1);
+  height: 100%;
+
+  /* merge into one selector */
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  /* merge into one selector */
+  margin: 0;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+
+  /* maintain aspect-ratio */
+  object-fit: cover;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+/*}}}*/
+
+body{
+  display:grid;
+  grid-template-columns: 1fr max(400px,60%) 1fr;
+}
+
+#shelf{
+  grid-column: 2/3;
+}
+.section{
+  display:grid;
+  gap:20px;
+  justify-content: center;
+  text-align: center;
+ }
