@@ -24,9 +24,7 @@ play[2][0]=1
 // play[0][1]=1
 // play[0][2]=1
 alert(play)
-
-function Check(board){
-  console.log("Board is being checked")
+function horizontalCheck(board){
   for (let i=0;i<board.length;i++){// NOTE: check Horizontal
     let firstValue = board[i][0];
     var win = board[i].every(value => value === firstValue);
@@ -40,6 +38,9 @@ function Check(board){
     }
     console.log("row =",i,"same values?",win,firstValue)
   }
+}
+
+function verticalCheck(board){
   for(let i=0;i<board[0].length;i++){// NOTE: check Vertical
     let arr = []
     for (let l=0;l<board.length;l++){
@@ -54,12 +55,15 @@ function Check(board){
       return firstValue;
     }
   }
+}
+
+function diagonalCheck(board){
   let arr = []
   for (let l=0;l<board.length;l++){// NOTE: Diagonal Inverse
     arr.push(board[l][l])
   }
   let firstValue = arr[0];
-  win = arr.every(value => value === firstValue);
+  let win = arr.every(value => value === firstValue);
   console.log("diagonal inv ","same values?",win,firstValue)
   if (firstValue!=0&&win==true){
     alert(firstValue,"win")
@@ -79,10 +83,16 @@ function Check(board){
     console.log("same value detected")
     return firstValue;
   }
+
+}
+function Check(board){
+  console.log("Board is being checked")
+  let horWin = horizontalCheck(board)
+  let verWin = verticalCheck(board)
+  let diaWin = diagonalCheck(board)
+  console.log(horWin,verWin,diaWin)
 }
 
 alert(play)
 
 console.log("check = ",Check(play))
-function checkwin(board){
-}
