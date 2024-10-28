@@ -1,4 +1,19 @@
 const boardDiv = document.querySelector('.board');
+
+let turn = 1;
+
+function changeTurn(){
+  console.log("changeTurn",turn)
+  if (turn==1){
+    turn=2;
+    return turn
+  }
+  else{
+    turn=1;
+    return turn
+  }
+}
+
 function Gameboard(column,row){
   let board = [];
 
@@ -70,7 +85,6 @@ function diagonalCheck(board){
     console.log("same value detected")
     return firstValue;
   }
-
 }
 
 function Board(board){
@@ -84,11 +98,46 @@ function Board(board){
 
       for (let l = 0; l<column;l++){
         board[i][l]=0
+
         const ticBlock=document.createElement('div');
         ticBlock.className='block'
         ticBlock.classList.add(`column${l}`);
         ticBlock.classList.add(`row${i}`);
         ticRow.appendChild(ticBlock);
+
+        let click = true;
+        ticBlock.onclick = function(){
+          if (click==true){
+            console.log("Board is being clicked")
+            const image = document.createElement('img');
+            if (turn==1){
+              image.src = 'icons8-cross-100.png';
+            }
+            else{
+              image.src = 'icons8-circle-100.png';
+            }
+            if (board[i][l]==0){
+              board[i][l] = turn
+            }
+            console.log("block clicked assign on =",i,l)
+            console.log(board)
+            ticBlock.appendChild(image);
+          }
+            let horWin = horizontalCheck(board)
+            if(horWin==true){
+              alert(`${turn} WON`)
+            }
+            let verWin = verticalCheck(board)
+            if(verWin==true){
+              alert(`${turn} WON`)
+            }
+            let diaWin = diagonalCheck(board)
+            if(diaWin==true){
+              alert(`${turn} WON`)
+            }
+            changeTurn()
+          click = false;
+        }
       }
       boardDiv.appendChild(ticRow)
 
@@ -97,8 +146,10 @@ function Board(board){
   }
   const assign =(i,l,input)=>{
     console.log(input,"is assigned at",i,l)
-    board[i][l] = input
-    return board;
+    if (board[i][l]==0){
+      board[i][l] = input
+      return board;
+    }
   } 
   const check = function Check(board){
     console.log("Board is being checked")
@@ -117,19 +168,15 @@ function Board(board){
 }
 
 const play = []
-const playBoard = new Board(play)
+const playBoard = Board(play)
 
 console.log("test1")
 playBoard.make(3,3)
 console.log("test2")
 playBoard.show()
 console.log("test3")
-playBoard.assign(0,0,2)
 console.log("test4")
 playBoard.show()
 //FIX: Somehow show() shows the assigned value even if the value assign haven't declared yet
 
 const ticBlock=document.createElement('div');
-
-
-
