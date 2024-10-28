@@ -1,3 +1,4 @@
+const boardDiv = document.querySelector('.board');
 function Gameboard(column,row){
   let board = [];
 
@@ -76,9 +77,21 @@ function Board(board){
   const make = (row,column)=>{
     for (let i = 0; i<row;i++){
       board[i]=[]
+
+      const ticRow=document.createElement('div');
+      ticRow.className = 'blockRow'
+      ticRow.classList.add(`blockRow${i}`);
+
       for (let l = 0; l<column;l++){
         board[i][l]=0
+        const ticBlock=document.createElement('div');
+        ticBlock.className='block'
+        ticBlock.classList.add(`column${l}`);
+        ticBlock.classList.add(`row${i}`);
+        ticRow.appendChild(ticBlock);
       }
+      boardDiv.appendChild(ticRow)
+
     }
     return board
   }
@@ -115,3 +128,8 @@ playBoard.assign(0,0,2)
 console.log("test4")
 playBoard.show()
 //FIX: Somehow show() shows the assigned value even if the value assign haven't declared yet
+
+const ticBlock=document.createElement('div');
+
+
+

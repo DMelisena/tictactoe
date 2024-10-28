@@ -74,13 +74,34 @@ li {
 /*}}}*/
 
 body{
-  display:grid;
-  grid-template-columns: 1fr max(400px,60%) 1fr;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
 }
 
-#shelf{
-  grid-column: 2/3;
+.board{
+  display:flex;
+  flex-flow:column;
+  width:500px;
+  height:500px;
+  background-color:black;
+  gap:10px;
 }
+
+.blockRow{
+  flex:1;
+  background-color:green;
+  display:grid;
+  gap:10px;
+  grid-template-columns: repeat(1fr);
+  grid-auto-flow: column;
+}
+
+.block{
+  background-color: blue;
+}
+
 .section{
   display:grid;
   gap:20px;
