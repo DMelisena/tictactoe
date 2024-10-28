@@ -1,6 +1,5 @@
-
 function Gameboard(column,row){
-  var board = [];
+  let board = [];
 
   for (let i = 0; i<row;i++){
     board[i]=[]
@@ -11,23 +10,10 @@ function Gameboard(column,row){
   return board
 }
 
-let play = Gameboard(3,3)
-
-alert(play)
-console.log(play)
-
-play[0][2]=1
-play[1][1]=1
-play[2][0]=1
-
-// play[0][0]=1
-// play[0][1]=1
-// play[0][2]=1
-alert(play)
 function horizontalCheck(board){
   for (let i=0;i<board.length;i++){// NOTE: check Horizontal
     let firstValue = board[i][0];
-    var win = board[i].every(value => value === firstValue);
+    let win = board[i].every(value => value === firstValue);
     //console.log("win?",win,firstValue)
     //console.log(firstValue!=0)
     //console.log(win==true)
@@ -85,14 +71,47 @@ function diagonalCheck(board){
   }
 
 }
-function Check(board){
-  console.log("Board is being checked")
-  let horWin = horizontalCheck(board)
-  let verWin = verticalCheck(board)
-  let diaWin = diagonalCheck(board)
-  console.log(horWin,verWin,diaWin)
+
+function Board(board){
+  const make = (row,column)=>{
+    for (let i = 0; i<row;i++){
+      board[i]=[]
+      for (let l = 0; l<column;l++){
+        board[i][l]=0
+      }
+    }
+    return board
+  }
+  const assign =(i,l,input)=>{
+    console.log(input,"is assigned at",i,l)
+    board[i][l] = input
+    return board;
+  } 
+  const check = function Check(board){
+    console.log("Board is being checked")
+    let horWin = horizontalCheck(board)
+    let verWin = verticalCheck(board)
+    let diaWin = diagonalCheck(board)
+    let winArr = [horWin,verWin,diaWin]
+
+    return winArr.some(value => value !== undefined)
+  }
+  const show = ()=>{
+    console.log("result",board)
+    alert("result",board)
+  }
+  return{board,make,assign,check,show}
 }
 
-alert(play)
+const play = []
+const playBoard = new Board(play)
 
-console.log("check = ",Check(play))
+console.log("test1")
+playBoard.make(3,3)
+console.log("test2")
+playBoard.show()
+console.log("test3")
+playBoard.assign(0,0,2)
+console.log("test4")
+playBoard.show()
+//FIX: Somehow show() shows the assigned value even if the value assign haven't declared yet
