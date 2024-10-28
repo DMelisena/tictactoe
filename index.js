@@ -17,8 +17,8 @@ alert(play)
 console.log(play)
 
 play[0][2]=1
-play[1][2]=1
-play[2][2]=1
+play[1][1]=1
+play[2][0]=1
 
 // play[0][0]=1
 // play[0][1]=1
@@ -54,12 +54,35 @@ function Check(board){
       return firstValue;
     }
   }
+  let arr = []
+  for (let l=0;l<board.length;l++){// NOTE: Diagonal Inverse
+    arr.push(board[l][l])
+  }
+  let firstValue = arr[0];
+  win = arr.every(value => value === firstValue);
+  console.log("diagonal inv ","same values?",win,firstValue)
+  if (firstValue!=0&&win==true){
+    alert(firstValue,"win")
+    console.log("same value detected")
+    return firstValue;
+  }
+  arr=[]
+  for (let l=0;l<board.length;l++){ // NOTE: Diagonal
+    arr.push(board[l][board.length-1-l])
+  }
+  firstValue = arr[0];
+  win = arr.every(value => value === firstValue);
+  console.log("diagonal","same values?",win,firstValue)
+  console.log("arr",arr)
+  if (firstValue!=0&&win==true){
+    alert(firstValue,"win")
+    console.log("same value detected")
+    return firstValue;
+  }
 }
 
 alert(play)
 
 console.log("check = ",Check(play))
-
 function checkwin(board){
-
 }
