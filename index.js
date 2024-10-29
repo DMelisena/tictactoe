@@ -75,7 +75,18 @@ function diagonalCheck(board){
   }
 }
 
+function boardReset(board){
+  const reset = ()=>{
+      const allImages = document.querySelectorAll('.playerSymbol');
+      allImages.forEach(image => {
+       allImages.parentNode.removeFirstChild(allImages);
+      });
+    //FIX:Reset is still not working
+  }
+  return{board,reset} }
+
 function boardSimple(board){
+  const{reset}=boardReset(board)
   const assign =(i,l)=>{
     console.log(turn,"boardSimple assign activated at",i,l)
     if (board[i][l]==0){
@@ -94,10 +105,10 @@ function boardSimple(board){
     let winner = winArr.some(value => value !== undefined)
     console.log("winner exist?",winner)
 if (winner==true){
-      alert(`${turn} IS THE WINNER`)
+      alert(`Player ${turn} IS THE WINNER`)
+      reset()
     }
   }
-  
   const show = ()=>{
     console.log("boardSimple show activated",board)
   }
@@ -105,17 +116,18 @@ if (winner==true){
     const image = document.createElement('img');
     if (turn==1){
       image.src = 'icons8-cross-100.png';
+      image.className = 'playerSymbol'
     }
     else{
       image.src = 'icons8-circle-100.png';
     }
     return image
   }
-  return{board,assign,check,show,imageAdd}
+  return{board,assign,check,show,imageAdd,reset}
 }
 
 function Board(board){
-  const{assign,check,show,imageAdd}=boardSimple(board)
+  const{assign,check,show,imageAdd,reset}=boardSimple(board)
   const make = (row,column)=>{
     for (let i = 0; i<row;i++){
       board[i]=[]
