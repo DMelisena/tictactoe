@@ -85,13 +85,12 @@ body{
   flex-flow:column;
   width:500px;
   height:500px;
-  background-color:black;
+  background-color:var(--color1);
   gap:10px;
 }
 
 .blockRow{
   flex:1;
-  background-color:green;
   display:grid;
   gap:10px;
   grid-template-columns: repeat(3,1fr);

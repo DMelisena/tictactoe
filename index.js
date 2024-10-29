@@ -96,9 +96,8 @@ function boardSimple(board){
 if (winner==true){
       alert(`${turn} IS THE WINNER`)
     }
-
-    
   }
+  
   const show = ()=>{
     console.log("boardSimple show activated",board)
   }
@@ -163,13 +162,11 @@ function Board(board){
 const play = []
 const playBoard = Board(play)
 
-console.log("test1")
+// console.log("test1")
 playBoard.make(3,3)
-console.log("test2")
-playBoard.show()
-console.log("test3")
-console.log("test4")
-playBoard.show()
+// console.log("test2")
+// playBoard.show()
+// console.log("test3")
+// console.log("test4")
+// playBoard.show()
 //FIX: Somehow show() shows the assigned value even if the value assign haven't declared yet
-
-const ticBlock=document.createElement('div');
