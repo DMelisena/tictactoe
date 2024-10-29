@@ -14,18 +14,6 @@ function changeTurn(){
   }
 }
 
-function Gameboard(column,row){
-  let board = [];
-
-  for (let i = 0; i<row;i++){
-    board[i]=[]
-    for (let l = 0; l<column;l++){
-      board[i][l]=0
-    }
-  }
-  return board
-}
-
 function horizontalCheck(board){
   for (let i=0;i<board.length;i++){// NOTE: check Horizontal
     let firstValue = board[i][0];
@@ -87,7 +75,48 @@ function diagonalCheck(board){
   }
 }
 
+function boardSimple(board){
+  const assign =(i,l)=>{
+    console.log(turn,"boardSimple assign activated at",i,l)
+    if (board[i][l]==0){
+      board[i][l] = turn
+      return board;
+    }
+  } 
+  const check = function Check(board){
+    console.log("Board is being checked")
+    let horWin = horizontalCheck(board)
+    let verWin = verticalCheck(board)
+    let diaWin = diagonalCheck(board)
+    let winArr = [horWin,verWin,diaWin]
+
+    console.log("Board is checked. winner is")
+    let winner = winArr.some(value => value !== undefined)
+    console.log("winner exist?",winner)
+if (winner==true){
+      alert(`${turn} IS THE WINNER`)
+    }
+
+    
+  }
+  const show = ()=>{
+    console.log("boardSimple show activated",board)
+  }
+  const imageAdd = ()=>{
+    const image = document.createElement('img');
+    if (turn==1){
+      image.src = 'icons8-cross-100.png';
+    }
+    else{
+      image.src = 'icons8-circle-100.png';
+    }
+    return image
+  }
+  return{board,assign,check,show,imageAdd}
+}
+
 function Board(board){
+  const{assign,check,show,imageAdd}=boardSimple(board)
   const make = (row,column)=>{
     for (let i = 0; i<row;i++){
       board[i]=[]
@@ -108,34 +137,18 @@ function Board(board){
         let click = true;
         ticBlock.onclick = function(){
           if (click==true){
+            ticBlock.appendChild(imageAdd());
             console.log("Board is being clicked")
-            const image = document.createElement('img');
-            if (turn==1){
-              image.src = 'icons8-cross-100.png';
-            }
-            else{
-              image.src = 'icons8-circle-100.png';
-            }
             if (board[i][l]==0){
-              board[i][l] = turn
+              assign(i,l)
+              show()
             }
             console.log("block clicked assign on =",i,l)
-            console.log(board)
-            ticBlock.appendChild(image);
-          }
-            let horWin = horizontalCheck(board)
-            if(horWin==true){
-              alert(`${turn} WON`)
-            }
-            let verWin = verticalCheck(board)
-            if(verWin==true){
-              alert(`${turn} WON`)
-            }
-            let diaWin = diagonalCheck(board)
-            if(diaWin==true){
-              alert(`${turn} WON`)
-            }
+            check(board)
             changeTurn()
+          }
+          console.log("testing inheritance")
+          show()
           click = false;
         }
       }
@@ -143,26 +156,6 @@ function Board(board){
 
     }
     return board
-  }
-  const assign =(i,l,input)=>{
-    console.log(input,"is assigned at",i,l)
-    if (board[i][l]==0){
-      board[i][l] = input
-      return board;
-    }
-  } 
-  const check = function Check(board){
-    console.log("Board is being checked")
-    let horWin = horizontalCheck(board)
-    let verWin = verticalCheck(board)
-    let diaWin = diagonalCheck(board)
-    let winArr = [horWin,verWin,diaWin]
-
-    return winArr.some(value => value !== undefined)
-  }
-  const show = ()=>{
-    console.log("result",board)
-    alert("result",board)
   }
   return{board,make,assign,check,show}
 }
