@@ -126,16 +126,31 @@ if (winner){
     ticRowCreate.className = 'blockRow'
     return ticRowCreate
 }
-  const createBlock=(i,l)=>{
+  const createBlock=(i,l,click)=>{
     const ticBlockCreate=document.createElement('div');
     ticBlockCreate.className='block'
     ticBlockCreate.classList.add(`column${l}`);
     ticBlockCreate.classList.add(`row${i}`);
+    ticBlockCreate.onclick = function(){
+      if (click){
+        ticBlockCreate.appendChild(imageAdd());
+        console.log("Board is being clicked")
+        if (board[i][l]===0){
+          assign(i,l)
+          show()
+        }
+        console.log("block clicked assign on =",i,l)
+        check(board)
+        changeTurn()
+      }
+      console.log("testing inheritance")
+      show()
+      click = false;
+    }
     return ticBlockCreate
   }
   return{board,assign,check,show,imageAdd,reset,createRowDiv,createBlock}
 }
-
 
 function Board(board){
   const{assign,check,show,imageAdd,reset,createRowDiv,createBlock}=boardSimple(board)
@@ -148,26 +163,9 @@ function Board(board){
       for (let l = 0; l<column;l++){//create columns
         board[i][l]=0
 
-        const ticBlock = createBlock(i,l)
-        ticRow.appendChild(ticBlock);
-
         let click = true;
-        ticBlock.onclick = function(){
-          if (click){
-            ticBlock.appendChild(imageAdd());
-            console.log("Board is being clicked")
-            if (board[i][l]===0){
-              assign(i,l)
-              show()
-            }
-            console.log("block clicked assign on =",i,l)
-            check(board)
-            changeTurn()
-          }
-          console.log("testing inheritance")
-          show()
-          click = false;
-        }
+        const ticBlock = createBlock(i,l,click)
+        ticRow.appendChild(ticBlock);
       }
       boardDiv.appendChild(ticRow)
     }
@@ -179,10 +177,10 @@ function Board(board){
 const gameFlow = (function(){
   const play = []
   const playBoard = Board(play)
-
   // console.log("test1")
   playBoard.make(3,3)
 })();
+
 // console.log("test2")
 // playBoard.show()
 // console.log("test3")
