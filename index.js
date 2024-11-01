@@ -121,26 +121,34 @@ if (winner){
     }
     return image
   }
-  return{board,assign,check,show,imageAdd,reset}
+  const createRowDiv=()=>{
+    const ticRowCreate=document.createElement('div');
+    ticRowCreate.className = 'blockRow'
+    return ticRowCreate
+}
+  const createBlock=(i,l)=>{
+    const ticBlockCreate=document.createElement('div');
+    ticBlockCreate.className='block'
+    ticBlockCreate.classList.add(`column${l}`);
+    ticBlockCreate.classList.add(`row${i}`);
+    return ticBlockCreate
+  }
+  return{board,assign,check,show,imageAdd,reset,createRowDiv,createBlock}
 }
 
+
 function Board(board){
-  const{assign,check,show,imageAdd,reset}=boardSimple(board)
+  const{assign,check,show,imageAdd,reset,createRowDiv,createBlock}=boardSimple(board)
   const make = (row,column)=>{
-    for (let i = 0; i<row;i++){
+    for (let i = 0; i<row;i++){ //create rows
       board[i]=[]
 
-      const ticRow=document.createElement('div');
-      ticRow.className = 'blockRow'
-      ticRow.classList.add(`blockRow${i}`);
+      const ticRow = createRowDiv()
 
-      for (let l = 0; l<column;l++){
+      for (let l = 0; l<column;l++){//create columns
         board[i][l]=0
 
-        const ticBlock=document.createElement('div');
-        ticBlock.className='block'
-        ticBlock.classList.add(`column${l}`);
-        ticBlock.classList.add(`row${i}`);
+        const ticBlock = createBlock(i,l)
         ticRow.appendChild(ticBlock);
 
         let click = true;
@@ -181,3 +189,5 @@ const gameFlow = (function(){
 // console.log("test4")
 // playBoard.show()
 //FIX: Somehow show() shows the assigned value even if the value assign haven't declared yet
+// Implement resets
+// reset when there's no winner
