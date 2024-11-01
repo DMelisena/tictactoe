@@ -4,7 +4,7 @@ let turn = 1;
 
 function changeTurn(){
   console.log("changeTurn",turn)
-  if (turn==1){
+  if (turn===1){
     turn=2;
     return turn
   }
@@ -21,7 +21,7 @@ function horizontalCheck(board){
     //console.log("win?",win,firstValue)
     //console.log(firstValue!=0)
     //console.log(win==true)
-    if (firstValue!=0&&win==true){
+    if (firstValue!=0&&win){
       alert(firstValue,"win")
       console.log("same value detected")
       return firstValue;
@@ -39,7 +39,7 @@ function verticalCheck(board){
     let firstValue = arr[0];
     let win = arr.every(value => value === firstValue);
     console.log("column =",i,"same values?",win,firstValue)
-    if (firstValue!=0&&win==true){
+    if (firstValue!=0&&win){
       alert(firstValue,"win")
       console.log("same value detected")
       return firstValue;
@@ -55,7 +55,7 @@ function diagonalCheck(board){
   let firstValue = arr[0];
   let win = arr.every(value => value === firstValue);
   console.log("diagonal inv ","same values?",win,firstValue)
-  if (firstValue!=0&&win==true){
+  if (firstValue!=0&&win){
     alert(firstValue,"win")
     console.log("same value detected")
     return firstValue;
@@ -68,7 +68,7 @@ function diagonalCheck(board){
   win = arr.every(value => value === firstValue);
   console.log("diagonal","same values?",win,firstValue)
   console.log("arr",arr)
-  if (firstValue!=0&&win==true){
+  if (firstValue!=0&&win){
     alert(firstValue,"win")
     console.log("same value detected")
     return firstValue;
@@ -89,7 +89,7 @@ function boardSimple(board){
   const{reset}=boardReset(board)
   const assign =(i,l)=>{
     console.log(turn,"boardSimple assign activated at",i,l)
-    if (board[i][l]==0){
+    if (board[i][l]===0){
       board[i][l] = turn
       return board;
     }
@@ -104,7 +104,7 @@ function boardSimple(board){
     console.log("Board is checked. winner is")
     let winner = winArr.some(value => value !== undefined)
     console.log("winner exist?",winner)
-if (winner==true){
+if (winner){
       alert(`Player ${turn} IS THE WINNER`)
       reset()
     }
@@ -114,7 +114,7 @@ if (winner==true){
   }
   const imageAdd = ()=>{
     const image = document.createElement('img');
-    if (turn==1){
+    if (turn===1){
       image.src = 'icons8-cross-100.png';
       image.className = 'playerSymbol'
     }
@@ -147,10 +147,10 @@ function Board(board){
 
         let click = true;
         ticBlock.onclick = function(){
-          if (click==true){
+          if (click){
             ticBlock.appendChild(imageAdd());
             console.log("Board is being clicked")
-            if (board[i][l]==0){
+            if (board[i][l]===0){
               assign(i,l)
               show()
             }
