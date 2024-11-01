@@ -18,9 +18,7 @@ function horizontalCheck(board){
   for (let i=0;i<board.length;i++){// NOTE: check Horizontal
     let firstValue = board[i][0];
     let win = board[i].every(value => value === firstValue);
-    //console.log("win?",win,firstValue)
-    //console.log(firstValue!=0)
-    //console.log(win==true)
+    //check if the first item is the same with all the remaining array
     if (firstValue!=0&&win){
       alert(firstValue,"win")
       console.log("same value detected")
@@ -164,18 +162,19 @@ function Board(board){
         }
       }
       boardDiv.appendChild(ticRow)
-
     }
     return board
   }
   return{board,make,assign,check,show}
 }
 
-const play = []
-const playBoard = Board(play)
+const gameFlow = (function(){
+  const play = []
+  const playBoard = Board(play)
 
-// console.log("test1")
-playBoard.make(3,3)
+  // console.log("test1")
+  playBoard.make(3,3)
+})();
 // console.log("test2")
 // playBoard.show()
 // console.log("test3")
