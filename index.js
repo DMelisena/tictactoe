@@ -171,7 +171,9 @@ function Board(board){
     }
     return board
   }
-  return{board,make,assign,check,show}
+  let firstScore = 0;
+  let secondScore = 0;
+  return{board,make,assign,check,show,firstScore,secondScore}
 }
 
 const createPlayerBoard=(name,div,score)=>{
@@ -200,12 +202,10 @@ const insertUser=(score1,score2)=>{
 
 const gameFlow = (function(){
   const play = []
-  let firstScore = 0;
-  let secondScore = 0;
   const playBoard = Board(play)
   // console.log("test1")
   playBoard.make(3,3)
-  insertUser(firstScore,secondScore);
+  insertUser(playBoard.firstScore,playBoard.secondScore);
 })();
 
 // console.log("test2")
