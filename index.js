@@ -116,6 +116,23 @@ function boardSimple(board){
     createPlayerBoard(user2,board2Div,score2)
     return(board1Div)
   }
+  const make = (row,column)=>{
+    for (let i = 0; i<row;i++){ //create rows
+
+      board[i]=[]
+      const ticRow = createRowDiv()
+
+      for (let l = 0; l<column;l++){//create columns
+        board[i][l]=0
+
+        let click = true;
+        const ticBlock = createBlock(i,l,click)
+        ticRow.appendChild(ticBlock);
+      }
+      boardDiv.appendChild(ticRow)
+    }
+    return board
+  }
   const check = function Check(board){
     console.log("Board is being checked")
     let horWin = horizontalCheck(board)
@@ -132,11 +149,19 @@ function boardSimple(board){
         firstScore++
         const board1Div = document.querySelector('.board1');
         board1Div.lastChild.textContent = firstScore;
+        while (boardDiv.firstChild){
+          boardDiv.removeChild(boardDiv.lastChild)
+        }
+        make(3,3)
       }
       else{
         secondScore++
         const board2Div = document.querySelector('.board2');
         board2Div.lastChild.textContent = secondScore;
+        while (boardDiv.firstChild){
+          boardDiv.removeChild(boardDiv.lastChild)
+        }
+        make(3,3)
       }
     }
   }
@@ -182,28 +207,11 @@ function boardSimple(board){
     }
     return ticBlockCreate
   }
-  return{board,assign,check,show,imageAdd,reset,createRowDiv,createBlock,firstScore,secondScore,insertUser,createPlayerBoard}
+  return{board,assign,check,show,imageAdd,reset,createRowDiv,createBlock,firstScore,secondScore,insertUser,createPlayerBoard,make}
 }
 
 function Board(board){
-  const{assign,check,show,imageAdd,reset,createRowDiv,createBlock,firstScore,secondScore,insertUser,createPlayerBoard}=boardSimple(board)
-  const make = (row,column)=>{
-    for (let i = 0; i<row;i++){ //create rows
-
-      board[i]=[]
-      const ticRow = createRowDiv()
-
-      for (let l = 0; l<column;l++){//create columns
-        board[i][l]=0
-
-        let click = true;
-        const ticBlock = createBlock(i,l,click)
-        ticRow.appendChild(ticBlock);
-      }
-      boardDiv.appendChild(ticRow)
-    }
-    return board
-  }
+  const{assign,check,show,imageAdd,reset,createRowDiv,createBlock,firstScore,secondScore,insertUser,createPlayerBoard,make}=boardSimple(board)
   return{board,make,assign,check,show,firstScore,secondScore,insertUser,createPlayerBoard}
 }
 
