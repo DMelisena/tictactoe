@@ -134,7 +134,13 @@ body{
 
 .playerScore{
   color: white;
-  font-size: 1em;
   text-align: center;
   padding:5px;
 }
+.playerScore,
+.playerName{
+  font-size: clamp(1vw, 2vw + 1rem, 20rem);
+ }
+ /*TODO: Find a way to move the player board into bottom
+  * if it turned too small, or any other way that would
+  * look better on smaller window*/
