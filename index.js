@@ -156,8 +156,8 @@ function Board(board){
   const{assign,check,show,imageAdd,reset,createRowDiv,createBlock}=boardSimple(board)
   const make = (row,column)=>{
     for (let i = 0; i<row;i++){ //create rows
-      board[i]=[]
 
+      board[i]=[]
       const ticRow = createRowDiv()
 
       for (let l = 0; l<column;l++){//create columns
@@ -174,11 +174,38 @@ function Board(board){
   return{board,make,assign,check,show}
 }
 
+const createPlayerBoard=(name,div,score)=>{
+  const playerNameDiv=document.createElement('div');
+  playerNameDiv.className = 'playerName';
+  playerNameDiv.textContent=name;
+  const playerScoreDiv=document.createElement('div');
+  playerScoreDiv.className = 'playerScore';
+  playerScoreDiv.textContent = score;
+  const playerBoardDiv = div;
+  playerBoardDiv.appendChild(playerNameDiv)
+  playerBoardDiv.appendChild(playerScoreDiv)
+}
+
+const insertUser=(score1,score2)=>{
+  let user1=prompt("insert player 1's username","Player 1")
+  let user2=prompt("insert player 2's username","Player 2")
+  const board1Div = document.querySelector('.board1');
+  const board2Div = document.querySelector('.board2');
+  // board1Div.style.backgroundColor = "red";
+  // board2Div.style.backgroundColor = "red";
+  createPlayerBoard(user1,board1Div,score1)
+  createPlayerBoard(user2,board2Div,score2)
+  return(board1Div)
+}
+
 const gameFlow = (function(){
   const play = []
+  let firstScore = 0;
+  let secondScore = 0;
   const playBoard = Board(play)
   // console.log("test1")
   playBoard.make(3,3)
+  insertUser(firstScore,secondScore);
 })();
 
 // console.log("test2")

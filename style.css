@@ -75,7 +75,7 @@ li {
 
 body{
   display:flex;
-  justify-content:center;
+  justify-content:space-around;
   align-items:center;
   height:100vh;
 }
@@ -85,6 +85,7 @@ body{
   flex-flow:column;
   width:500px;
   height:500px;
+  aspect-ratio:1/1;
   background-color:var(--color1);
   gap:10px;
 }
@@ -118,4 +119,22 @@ body{
   text-align: center;
  }
 
+.playerBoard{
+  background-color:var(--color3);
+  width:20%;
+  aspect-ratio:8/9;
+}
 
+.playerName{
+  color: white;
+  font-size: 1em;
+  text-align: center;
+  padding:5px;
+}
+
+.playerScore{
+  color: white;
+  font-size: 1em;
+  text-align: center;
+  padding:5px;
+}
